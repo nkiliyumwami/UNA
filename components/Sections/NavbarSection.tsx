@@ -111,7 +111,7 @@ const Navbar = () => {
             Contact us
           </a>
           <a
-            href="/"
+            href="/donate"
             className={`hover:text-[#4894DF] px-2 font-semibold ${
               isActive('') ? 'text-[#4894DF]' : ''
             }`}
@@ -184,7 +184,7 @@ const Navbar = () => {
               isActive('/media') ? 'text-[#4894DF]' : ''
             }`}
           >
-           Media
+            Media
           </a>
           <a
             href="/get-involved"
@@ -203,7 +203,7 @@ const Navbar = () => {
             Contact Us
           </a>
           <a
-            href="/"
+            href="/donate"
             className={`block px-4 py-2 hover:text-[#4894DF] font-semibold ${
               isActive('#') ? 'text-[#4894DF]' : ''
             }`}
