@@ -1,5 +1,9 @@
-import { useState } from 'react'
+import React from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import { toast } from 'react-toastify'
+import axios from 'axios'
 
 interface FormValues {
   firstname: string
@@ -7,16 +11,44 @@ interface FormValues {
   email: string
   address: string
   phone: string
-  message: string
   type: 'membership' | 'volunteering'
 }
 
-export default function GetInvolvedForm({ isOpen, setIsOpen, type }: any) {
+// Define validation schema
+const schema = yup.object().shape({
+  firstname: yup.string().required('Firstname is required'),
+  lastname: yup.string().required('Lastname is required'),
+  email: yup
+    .string()
+    .email('Invalid email format')
+    .required('Email is required'),
+  address: yup.string().required('Address is required'),
+  phone: yup.string().required('Phone is required'),
+  type: yup
+    .string()
+    .oneOf(['membership', 'volunteering'], 'Invalid type')
+    .required('Type is required'),
+})
+
+interface GetInvolvedFormProps {
+  isOpen: boolean
+  setIsOpen: (isOpen: boolean) => void
+  type: 'membership' | 'volunteering'
+}
+
+const GetInvolvedForm: React.FC<GetInvolvedFormProps> = ({
+  isOpen,
+  setIsOpen,
+  type,
+}) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>()
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>({
+    resolver: yupResolver(schema),
+  })
 
   const handleClosePopup = () => {
     setIsOpen(false)
@@ -24,22 +56,15 @@ export default function GetInvolvedForm({ isOpen, setIsOpen, type }: any) {
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
-      const response = await fetch('/api/get-involved', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-      if (!response.ok) {
-        throw new Error('Network response was not ok')
+      const res = await axios.post('/api/get-involved', data)
+      if (res.status === 200) {
+        toast.success('Your enquiry has been sent!')
+        reset()
+      } else {
+        toast.error('There was an error. Please try again.')
       }
-      const result = await response.json()
-      console.log('Success:', result)
-      // Handle success (e.g., show a success message, reset the form)
-    } catch (error) {
-      console.error('Error:', error)
-      // Handle error (e.g., show an error message)
+    } catch (err) {
+      toast.error('There was an error. Please try again.')
     }
   }
 
@@ -54,7 +79,6 @@ export default function GetInvolvedForm({ isOpen, setIsOpen, type }: any) {
           <div className="bg-white rounded-lg p-8 z-10">
             <h2 className="text-2xl font-bold mb-4 items-center flex justify-center">
               Get Involved
-              {/* {type === 'volunteer' ? 'Volunteer' : 'Membership'} */}
             </h2>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-4 flex gap-4">
@@ -65,9 +89,7 @@ export default function GetInvolvedForm({ isOpen, setIsOpen, type }: any) {
                   <input
                     type="text"
                     id="firstname"
-                    {...register('firstname', {
-                      required: 'Firstname is required',
-                    })}
+                    {...register('firstname')}
                     className="w-full px-3 py-2 border border-gray-300 rounded"
                   />
                   {errors.firstname && (
@@ -81,9 +103,7 @@ export default function GetInvolvedForm({ isOpen, setIsOpen, type }: any) {
                   <input
                     type="text"
                     id="lastname"
-                    {...register('lastname', {
-                      required: 'Lastname is required',
-                    })}
+                    {...register('lastname')}
                     className="w-full px-3 py-2 border border-gray-300 rounded"
                   />
                   {errors.lastname && (
@@ -98,7 +118,7 @@ export default function GetInvolvedForm({ isOpen, setIsOpen, type }: any) {
                 <input
                   type="email"
                   id="email"
-                  {...register('email', { required: 'Email is required' })}
+                  {...register('email')}
                   className="w-full px-3 py-2 border border-gray-300 rounded"
                 />
                 {errors.email && (
@@ -110,9 +130,9 @@ export default function GetInvolvedForm({ isOpen, setIsOpen, type }: any) {
                   Address:
                 </label>
                 <input
-                  type=""
+                  type="text"
                   id="address"
-                  {...register('address', { required: 'Address is required' })}
+                  {...register('address')}
                   className="w-full px-3 py-2 border border-gray-300 rounded"
                 />
                 {errors.address && (
@@ -126,7 +146,7 @@ export default function GetInvolvedForm({ isOpen, setIsOpen, type }: any) {
                 <input
                   type="tel"
                   id="phone"
-                  {...register('phone', { required: 'Phone is required' })}
+                  {...register('phone')}
                   className="w-full px-3 py-2 border border-gray-300 rounded"
                 />
                 {errors.phone && (
@@ -134,19 +154,9 @@ export default function GetInvolvedForm({ isOpen, setIsOpen, type }: any) {
                 )}
               </div>
               <div className="mb-4">
-                <label htmlFor="message" className="block mb-2">
-                  Message:
-                </label>
-                <textarea
-                  id="message"
-                  {...register('message')}
-                  className="w-full px-3 py-2 border border-gray-300 rounded"
-                />
-              </div>
-              <div className="mb-4">
                 <label className="block mb-2">Type:</label>
                 <select
-                  {...register('type', { required: 'Type is required' })}
+                  {...register('type')}
                   className="w-full px-3 py-2 border border-gray-300 rounded"
                 >
                   <option value="membership">Membership</option>
@@ -166,9 +176,14 @@ export default function GetInvolvedForm({ isOpen, setIsOpen, type }: any) {
                 </button>
                 <button
                   type="submit"
-                  className="bg-blue-500 text-white px-4 py-2 rounded"
+                  className={`${
+                    isSubmitting
+                      ? 'bg-blue-300'
+                      : 'bg-[#4894DF] hover:bg-[#4a80b6]'
+                  } text-white py-2 rounded-md px-4 shadow-md`}
+                  disabled={isSubmitting}
                 >
-                  Submit
+                  {isSubmitting ? 'Submitting...' : 'Submit'}
                 </button>
               </div>
             </form>
@@ -178,3 +193,5 @@ export default function GetInvolvedForm({ isOpen, setIsOpen, type }: any) {
     </>
   )
 }
+
+export default GetInvolvedForm

@@ -1,20 +1,14 @@
-
 import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
 
 export async function POST(req: NextRequest) {
   const {
-    firstName,
-    lastName,
+    firstname,
+    lastname,
     email,
-    phoneNumber,
-    streetAddress,
-    city,
-    province,
-    postalCode,
-    country,
-    amount,
-    message,
+    address,
+    phone,
+    type,
   } = await req.json()
 
   const transporter = nodemailer.createTransport({
@@ -28,14 +22,13 @@ export async function POST(req: NextRequest) {
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: process.env.RECIPIENT_EMAIL,
-    subject: 'New Donation Enquiry',
-    text: `
-      Name: ${firstName} ${lastName}
-      Email: ${email}
-      Phone: ${phoneNumber}
-      Address: ${streetAddress}, ${city}, ${province}, ${postalCode}, ${country}
-      Amount: $${amount}
-      Message: ${message}
+    subject: `New ${type} form submission`,
+    html: `
+      <p><strong>Name:</strong> ${firstname} ${lastname}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Type:</strong> ${type}</p>
+      <p><strong>Address:</strong> ${address}</p>
     `,
   }
 

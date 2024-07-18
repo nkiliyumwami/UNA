@@ -23,18 +23,25 @@ const ContactUsSection = () => {
               Promoting the Aims and Ideals of the United Nations.
             </p>
             <div className="flex space-x-4">
-              <a href="/" className="text-gray-500 hover:text-gray-700">
+              <a
+                href="https://www.facebook.com/profile.php?id=61560827535878"
+                target="_blank"
+                className="text-gray-500 hover:text-gray-700"
+              >
                 <FaFacebook className="h-6 w-6" />
               </a>
-              <a href="/" className="text-gray-500 hover:text-gray-700">
+              <a
+                href="https://x.com/Una_Rwanda" target="_blank"
+                className="text-gray-500 hover:text-gray-700"
+              >
                 <FaTwitter className="h-6 w-6" />
               </a>
-              <a href="/" className="text-gray-500 hover:text-gray-700">
+              {/* <a href="/" className="text-gray-500 hover:text-gray-700">
                 <FaLinkedinIn className="h-6 w-6" />
-              </a>
-              <a href="/" className="text-gray-500 hover:text-gray-700">
+              </a> */}
+              {/* <a href="/" className="text-gray-500 hover:text-gray-700">
                 <FaInstagram className="h-6 w-6" />
-              </a>
+              </a> */}
             </div>
           </div>
           <div className="w-full md:w-1/4 px-4 mb-8">
@@ -79,20 +86,23 @@ const ContactUsSection = () => {
             </h3>
             <ul className="space-y-2">
               <li>
-                <a href="/contact-us" className="text-gray-600 hover:text-gray-800">
+                <a
+                  href="/contact-us"
+                  className="text-gray-600 hover:text-gray-800"
+                >
                   Contact Us
                 </a>
               </li>
               <li>
-                <a href="/" className="text-gray-600 hover:text-gray-800">
+                <a href="/donate" className="text-gray-600 hover:text-gray-800">
                   Donate
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a href="/" className="text-gray-600 hover:text-gray-800">
                   FAQ
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="w-full md:w-1/4 px-4 mb-8">

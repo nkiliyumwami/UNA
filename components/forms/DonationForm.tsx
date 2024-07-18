@@ -45,11 +45,9 @@ const DonationForm = () => {
         reset()
       } else {
         toast.error('There was an error. Please try again.')
-        // alert('There was an error. Please try again.')
       }
     } catch (err) {
       toast.error('There was an error. Please try again.')
-      // alert('There was an error. Please try again.')
     }
   }
 
@@ -236,28 +234,6 @@ const DonationForm = () => {
             <p className="text-red-500 text-sm">{errors.amount.message}</p>
           )}
         </div>
-        {/* <div className="mb-4">
-          <label className="block text-gray-700">Amount</label>
-          <CurrencyInput
-            id="input-example"
-            name="amount"
-            placeholder="Enter amount"
-            prefix="$"
-            min={1}
-            decimalsLimit={2}
-            // onValueChange={(value) => setValue('amount', parseFloat(value||''))}
-            onValueChange={(value, name, values) => {
-              setValue('amount', parseFloat(value || ''))
-              console.log(value, name, values)
-            }}
-            className={`w-full px-3 py-2 border border-gray-300 rounded-md ${
-              errors.amount ? 'border-red-500' : ''
-            }`}
-          />
-          {errors.amount && (
-            <p className="text-red-500 text-sm">{errors.amount.message}</p>
-          )}
-        </div> */}
         <div className="mb-4">
           <label className="block text-gray-700">Additional Information</label>
           <textarea
@@ -267,15 +243,19 @@ const DonationForm = () => {
             rows={4}
           ></textarea>
         </div>
-        <button
-          type="submit"
-          className={`w-full ${
-            Object.keys(errors).length !== 0 ? 'bg-blue-300' : 'bg-blue-500'
-          } text-white py-2 rounded-md`}
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? 'Submitting...' : 'Submit'}
-        </button>
+        <div className="text-center justify-center flex items-center">
+          <button
+            type="submit"
+            className={`w-full ${
+              Object.keys(errors).length !== 0
+                ? 'bg-blue-300'
+                : 'bg-[#4894DF] hover:bg-[#4a80b6]'
+            } text-white py-2 rounded-md px-4 shadow-md`}
+            disabled={isSubmitting || Object.keys(errors).length !== 0}
+          >
+            {isSubmitting ? 'Submitting...' : 'Submit'}
+          </button>
+        </div>
       </form>
     </div>
   )

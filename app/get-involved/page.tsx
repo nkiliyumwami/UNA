@@ -5,14 +5,14 @@ import { RiMailLine } from "react-icons/ri"
 import React, { useState } from 'react'
 import bgImage from '../../public/getinvolved.jpeg'
 import EmailSubscriptionPopup from "@/components/ui/EmailSubscriptionPopup"
-import GetInvolvedForm from "@/components/forms/VolunteerForm"
+import GetInvolvedForm from "@/components/forms/GetInvolvedForm"
 
 const GetInvolved = () => {
   const [isOpen, setIsOpen] = useState(false)
-      const [type, setType] = useState<string>('')
+      const [type, setType] = useState<'membership' | 'volunteering'>('membership');
 
 
-  const handleOpenPopup = (title:string) => {
+  const handleOpenPopup = (title:any) => {
     setType(title)
     setIsOpen(true)
   }
