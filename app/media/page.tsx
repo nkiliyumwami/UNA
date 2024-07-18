@@ -50,7 +50,7 @@ export default function Media() {
       {loading ? (
         <Loading/>
       ) : (
-        <div className="min-h-scree flex flex-col items-center justify-center max-w-7xl mx-auto py-12 sm:px-6 lg:px-8">
+        <div className=" flex flex-col items-center justify-center max-w-7xl mx-auto py-12 sm:px-6 lg:px-8">
           <div className="text-center mx-auto -mt-[5px] mb-[60px] max-w-[720px]">
             <h2 className="font-bold tracking-wide mb-4  text-3xl ">Gallery</h2>
           </div>
