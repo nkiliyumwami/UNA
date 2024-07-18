@@ -3,19 +3,11 @@ import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
 
 export async function POST(req: NextRequest) {
-  const {
-    firstName,
-    lastName,
-    email,
-    phoneNumber,
-    streetAddress,
-    city,
-    province,
-    postalCode,
-    country,
-    amount,
-    message,
-  } = await req.json()
+  const {name,
+  email,
+  phone,
+  subject,
+  message,} = await req.json()
 
   const transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -28,15 +20,9 @@ export async function POST(req: NextRequest) {
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: process.env.RECIPIENT_EMAIL,
-    subject: 'New Donation Enquiry',
-    text: `
-      Name: ${firstName} ${lastName}
-      Email: ${email}
-      Phone: ${phoneNumber}
-      Address: ${streetAddress}, ${city}, ${province}, ${postalCode}, ${country}
-      Amount: $${amount}
-      Message: ${message}
-    `,
+      subject: `New message from ${name}`,
+      text: `You have a new message from your website contact form.\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nSubject: ${subject}\nMessage:\n${message}`,
+    
   }
 
   try {

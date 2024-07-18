@@ -1,9 +1,58 @@
-import { PhoneIcon } from '@heroicons/react/16/solid'
+'use client'
 import React from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 import { FiMail } from 'react-icons/fi'
 import { HiOutlineLocationMarker } from 'react-icons/hi'
+import { PhoneIcon } from '@heroicons/react/16/solid'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+
+interface IFormInput {
+  name: string
+  email: string
+  phone: string
+  subject: string
+  message: string
+}
+
+const schema = yup.object().shape({
+  name: yup.string().required('Name is required'),
+  email: yup
+    .string()
+    .email('Invalid email format')
+    .required('Email is required'),
+  phone: yup.string().required('Phone number is required'),
+  subject: yup.string().required('Subject is required'),
+  message: yup.string().required('Message is required'),
+})
 
 const GetInTouch = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<IFormInput>({
+    resolver: yupResolver(schema),
+  })
+
+  const onSubmit: SubmitHandler<IFormInput> = async (data: any) => {
+
+    try {
+      const res = await axios.post('/api/contact', data)
+      if (res.status === 200) {
+        toast.success('Message sent successfully')
+        reset()
+      } else {
+        toast.error('There was an error. Please try again.')
+      }
+    } catch (err) {
+      toast.error('There was an error. Please try again.')
+    }
+  }
+
   return (
     <div className="bg-[#f6f3f3] py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,13 +64,13 @@ const GetInTouch = () => {
             <h3 className="text-lg font-medium">Mail Here</h3>
             <div className="flex flex-col">
               <a
-                href={`mailto:${'clarisse@unarwanda.org'}`}
+                href={`mailto:clarisse@unarwanda.org`}
                 className="text-gray-500 hover:text-[#4894DF]"
               >
                 Clarisse Ingabire
               </a>
               <a
-                href={`mailto:${'clarisse@unarwanda.org'}`}
+                href={`mailto:clarisse@unarwanda.org`}
                 className="text-gray-500 hover:text-[#4894DF]"
               >
                 Jane Kabera
@@ -61,7 +110,7 @@ const GetInTouch = () => {
         </div>
         <div className="p-8 border rounded-lg shadow-md">
           <h2 className="text-2xl font-bold text-center mb-6">Get In Touch</h2>
-          <form action="#" method="POST" className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-6 sm:space-y-0">
               <div className="flex-1">
                 <label htmlFor="name" className="sr-only">
@@ -69,11 +118,14 @@ const GetInTouch = () => {
                 </label>
                 <input
                   type="text"
-                  name="name"
                   id="name"
+                  {...register('name')}
                   className="w-full border-gray-300 rounded-md shadow-sm p-3"
                   placeholder="Name"
                 />
+                {errors.name && (
+                  <p className="text-red-500 text-sm">{errors.name.message}</p>
+                )}
               </div>
               <div className="flex-1">
                 <label htmlFor="email" className="sr-only">
@@ -81,11 +133,14 @@ const GetInTouch = () => {
                 </label>
                 <input
                   type="email"
-                  name="email"
                   id="email"
+                  {...register('email')}
                   className="w-full border-gray-300 rounded-md shadow-sm p-3"
                   placeholder="Email"
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-sm">{errors.email.message}</p>
+                )}
               </div>
             </div>
             <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-6 sm:space-y-0">
@@ -95,11 +150,14 @@ const GetInTouch = () => {
                 </label>
                 <input
                   type="tel"
-                  name="phone"
                   id="phone"
+                  {...register('phone')}
                   className="w-full border-gray-300 rounded-md shadow-sm p-3"
                   placeholder="Phone number"
                 />
+                {errors.phone && (
+                  <p className="text-red-500 text-sm">{errors.phone.message}</p>
+                )}
               </div>
               <div className="flex-1">
                 <label htmlFor="subject" className="sr-only">
@@ -107,11 +165,16 @@ const GetInTouch = () => {
                 </label>
                 <input
                   type="text"
-                  name="subject"
                   id="subject"
+                  {...register('subject')}
                   className="w-full border-gray-300 rounded-md shadow-sm p-3"
                   placeholder="Subject"
                 />
+                {errors.subject && (
+                  <p className="text-red-500 text-sm">
+                    {errors.subject.message}
+                  </p>
+                )}
               </div>
             </div>
             <div>
@@ -119,19 +182,27 @@ const GetInTouch = () => {
                 Message
               </label>
               <textarea
-                name="message"
                 id="message"
                 rows={4}
+                {...register('message')}
                 className="w-full border-gray-300 rounded-md shadow-sm p-3"
                 placeholder="Write your message..."
               ></textarea>
+              {errors.message && (
+                <p className="text-red-500 text-sm">{errors.message.message}</p>
+              )}
             </div>
             <div className="text-center">
               <button
                 type="submit"
-                className="bg-[#4894DF] text-white py-2 px-4 rounded-md shadow-md hover:bg-[#4a80b6]"
+                className={`w-full ${
+                  Object.keys(errors).length !== 0
+                    ? 'bg-blue-300'
+                    : 'bg-[#4894DF] hover:bg-[#4a80b6]'
+                } text-white py-2 rounded-md px-4 shadow-md`}
+                disabled={isSubmitting || Object.keys(errors).length !== 0}
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </div>
           </form>
