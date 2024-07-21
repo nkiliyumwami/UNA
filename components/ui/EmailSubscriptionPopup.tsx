@@ -1,10 +1,33 @@
 'use client'
 
 import { useState } from 'react'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import { toast } from 'react-toastify'
+import axios from 'axios'
 
-const EmailSubscriptionPopup = ({ option }: any) => {
+interface FormValues {
+  email: string
+}
+
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Invalid email format')
+    .required('Email is required'),
+})
+
+const EmailSubscriptionPopup = ({ option }: { option: string }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [email, setEmail] = useState('')
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>({
+    resolver: yupResolver(schema),
+  })
 
   const handleOpenPopup = () => {
     setIsOpen(true)
@@ -14,22 +37,22 @@ const EmailSubscriptionPopup = ({ option }: any) => {
     setIsOpen(false)
   }
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault()
-    // Perform email subscription logic here
-    console.log('Subscribing email:', email)
-    setEmail('')
-    handleClosePopup()
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    try {
+      const res = await axios.post('/api/subscribe', data)
+      if (res.status === 201) {
+        toast.success('You have successfully subscribed to our newsletter.')
+        reset()
+      } else {
+        toast.error('There was an error. Please try again.')
+      }
+    } catch (err: any) {      
+      toast.error(err.response.data.error)
+    }
   }
 
   return (
     <div>
-      {/* <button
-        className="bg-blue-500 text-white px-4 py-2 rounded"
-        
-      >
-        Subscribe
-      </button> */}
       <a
         href={option}
         onClick={handleOpenPopup}
@@ -48,23 +71,21 @@ const EmailSubscriptionPopup = ({ option }: any) => {
             <h2 className="text-2xl font-bold mb-4 items-center flex justify-center">
               Subscribe to Our Newsletter
             </h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-4">
-                <div className="flex justify-center capitalize mb-3 px-2 ">
+                <div className="flex justify-center capitalize mb-3 px-2">
                   Stay informed, by subscribing to our newsletter.
                 </div>
-                {/* <label htmlFor="email" className="block mb-2">
-                  Email:
-                </label> */}
                 <input
+                  {...register('email')}
                   type="email"
                   id="email"
                   placeholder="Enter your email address"
                   className="w-full px-3 py-2 border border-gray-300 rounded"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
                 />
+                {errors.email && (
+                  <p className="text-red-500">{errors.email.message}</p>
+                )}
               </div>
               <div className="flex justify-between w-full">
                 <button
@@ -76,9 +97,14 @@ const EmailSubscriptionPopup = ({ option }: any) => {
                 </button>
                 <button
                   type="submit"
-                  className="bg-blue-500 text-white px-4 py-2 rounded"
+                  className={`${
+                    isSubmitting
+                      ? 'bg-blue-300'
+                      : 'bg-[#4894DF] hover:bg-[#4a80b6]'
+                  } text-white py-2 rounded-md px-4 shadow-md`}
+                  disabled={isSubmitting}
                 >
-                  Subscribe
+                  {isSubmitting ? 'Subscribing...' : 'Subscribe'}
                 </button>
               </div>
             </form>
