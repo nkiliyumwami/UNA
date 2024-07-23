@@ -32,7 +32,6 @@ export async function POST(request: Request) {
     await newBlog.save()
     return NextResponse.json(newBlog, { status: 201 })
   } catch (error) {
-    console.error(error)
     return NextResponse.json(
       { error: 'Failed to create blog' },
       { status: 500 }
