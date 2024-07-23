@@ -1,6 +1,8 @@
 'use client'
 import React, { useState } from 'react'
 import Image from 'next/image'
+import profile from '../../public/profile.png'
+
 
 type ProfileProps = {
   name: string
@@ -41,18 +43,35 @@ const Profile: React.FC<ProfileProps> = ({
 
   return (
     <div className="md:flex-row flex-col flex  items-start space-x-4 py-4 border-b w-auto border-gray-300">
-      <Image
-        src={image}
-        alt={name}
-        className="w-32 h-32 rounded-full object-cover object-left-top"
-      />
+      {image ? (
+        <Image
+          src={image}
+          alt={name}
+          width={128}
+          height={128}
+          className="w-32 h-32 rounded-full object-cover object-left-top"
+        />
+      ) : (
+        <Image
+          src={profile}
+          alt={name}
+          width={128}
+          height={128}
+          className="w-32 h-32 rounded-full object-cover object-left-top"
+        />
+      )}
+
       <div className="flex-1">
         <h2 className="text-xl font-bold">{name}</h2>
         <p className="text-gray-500 mb-2">{role}</p>
-        {description===''?'':(<p className="text-gray-700">
-          {showMore ? description : briefDescription}
-        </p>)}
-        
+        {description === '' ? (
+          ''
+        ) : (
+          <p className="text-gray-700">
+            {showMore ? description : briefDescription}
+          </p>
+        )}
+
         <p className="mt-2 text-gray-600">
           If you would like to contact {name.split(' ')[0]} directly, email{' '}
           <a
