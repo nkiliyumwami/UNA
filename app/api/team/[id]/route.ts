@@ -1,5 +1,5 @@
 import TeamMember from '@/lib/models/teamMember'
-import dbConnect from '../../../../lib/dbConnect'
+import dbConnect from '../../../../lib/utils/dbConnect'
 import { NextResponse } from 'next/server'
 
 export async function GET(

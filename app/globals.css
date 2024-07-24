@@ -58,3 +58,7 @@ h2{
   opacity: 1;
 }
 
+.admin::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
