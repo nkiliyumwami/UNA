@@ -2,7 +2,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { cloudinaryService } from '@/lib/cloudinaryService'
+import { cloudinaryService } from '@/lib/utils/cloudinaryService'
 // import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import dynamic from 'next/dynamic'
@@ -109,7 +109,7 @@ const Admin = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-32">
+    <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold my-8">Manage Blog Posts</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -124,7 +124,7 @@ const Admin = () => {
         </div>
         <div>
           <label className="block text-sm font-medium">Description</label>
-            <ReactQuill value={description} onChange={setDescription} />
+          <ReactQuill value={description} onChange={setDescription} />
         </div>
         <div>
           <label className="block text-sm font-medium">Location</label>

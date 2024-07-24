@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { cloudinaryService } from '@/lib/cloudinaryService'
+import { cloudinaryService } from '@/lib/utils/cloudinaryService'
 
 const Admin = () => {
   const [teams, setTeams] = useState({ leadership: [], board: [] })
@@ -33,13 +33,13 @@ const Admin = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-   let uploadedImage = ''
-   if (file) {
-     const response = await cloudinaryService.upload(file)
-     if (response.success) {
-       uploadedImage = response.fileUrl
-     }
-   }
+    let uploadedImage = ''
+    if (file) {
+      const response = await cloudinaryService.upload(file)
+      if (response.success) {
+        uploadedImage = response.fileUrl
+      }
+    }
 
     setUploading(true)
 
@@ -112,7 +112,7 @@ const Admin = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-32">
+    <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold my-8">Manage Team Members</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

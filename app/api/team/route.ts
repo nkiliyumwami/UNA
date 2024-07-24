@@ -1,4 +1,4 @@
-import dbConnect from '@/lib/dbConnect'
+import dbConnect from '@/lib/utils/dbConnect'
 import TeamMember from '@/lib/models/teamMember'
 import { NextResponse } from 'next/server'
 
@@ -31,8 +31,8 @@ export async function POST(request: Request) {
     await newTeamMember.save()
     return NextResponse.json(newTeamMember, { status: 201 })
   } catch (error) {
-    console.log(error);
-    
+    console.log(error)
+
     return NextResponse.json(
       { error: 'Failed to create team member' },
       { status: 500 }

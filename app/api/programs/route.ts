@@ -1,8 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import dbConnect from '@/lib/dbConnect'
+import dbConnect from '@/lib/utils/dbConnect'
 import Program from '@/lib/models/Program'
 import { NextResponse } from 'next/server'
-
 
 export async function GET() {
   await dbConnect()
