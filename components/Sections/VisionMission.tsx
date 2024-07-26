@@ -16,7 +16,7 @@ const VisionMission = () => {
         <VisionMissionCard
           icon={<Image src={mission} alt="Mission" className="w-16 h-16" />}
           title="Mission"
-          description="Our mission is to actively champion and advocate for the aims and ideals set forth by the United Nations. Through our initiatives and collaborations, we aim to foster a global environment where cooperation, understanding, and sustainable development thrive"
+          description="Our mission is to actively champion and advocate for the aims and ideals set forth by the United Nations. Through our initiatives and collaborations, we aim to foster a global environment where cooperation, understanding, and sustainable development thrive."
         />
       </div>
     </div>

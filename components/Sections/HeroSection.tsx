@@ -19,7 +19,7 @@ const HeroSection = () => {
           </h1>
           <p className="mb-[15px] leading-[29px] md:text-balance md:text-center">
             Empowering Change, Uniting Humanity: The United Nations Association
-            Rwanda (UNA-RW) champions the Sustainable Development Goals and
+            Rwanda (UNA-RWANDA) champions the Sustainable Development Goals and
             promotes diversity, equity, and inclusion to create a peaceful and
             prosperous future for all. Join us in our commitment to addressing
             global challenges and building a brighter, more inclusive world for
