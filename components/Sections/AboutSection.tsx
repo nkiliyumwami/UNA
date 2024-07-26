@@ -26,7 +26,7 @@ export const AboutSection = () => {
 
               {/* <h4 className="text-[22px] mb-2 font-semibold">Our History</h4> */}
               <p className="leading-7 text-[15px] text-[#646464]">
-                The United Nations Association Rwanda (UNA-RW) is dedicated to
+                The United Nations Association Rwanda (UNA-RWANDA) is dedicated to
                 transformative change, focusing on achieving the Sustainable
                 Development Goals (SDGs), with an emphasis on eradicating
                 poverty, fostering peace, addressing climate change, and
@@ -34,7 +34,7 @@ export const AboutSection = () => {
                 inclusion, striving for a world where everyone thrives and
                 contributes to a brighter future. <br />
                 <br />
-                UNA-RW offers programs in knowledge dissemination, human rights
+                UNA-RWANDA offers programs in knowledge dissemination, human rights
                 promotion, peace and conflict resolution. We are part of a
                 global network of UNAs, coordinated by the World Federation of
                 United Nations Associations (WFUNA), active in over 100
