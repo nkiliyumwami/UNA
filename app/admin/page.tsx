@@ -28,9 +28,9 @@ export default function AdminPage() {
 
   return (
     <div className="p-8 ">
-      <h1 className="text-4xl font-bold mb-6 text-gray-800 text-center">
+      {/* <h1 className="text-4xl font-bold mb-6 text-gray-800 text-center">
         Welcome to the Admin Dashboard
-      </h1>
+      </h1> */}
       <div className="p-6 mb-6 bg-white rounded-lg shadow-lg flex items-center justify-center">
         {/* <div className="mr-4">
           <img

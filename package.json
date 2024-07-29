@@ -12,6 +12,7 @@
     "@heroicons/react": "^2.1.3",
     "@hookform/resolvers": "^3.9.0",
     "@types/mongoose": "^5.11.97",
+    "antd": "^5.19.3",
     "axios": "^1.7.2",
     "cloudinary": "^1.41.3",
     "framer-motion": "^11.2.12",
