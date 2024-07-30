@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Input, Select } from 'antd'
 import { cloudinaryService } from '@/lib/utils/cloudinaryService'
 
 interface TeamFormProps {
   onSubmit: (data: FormData) => void
-  initialValues?: any
+  initialData?: any
   uploading: boolean
 }
 
@@ -12,18 +12,29 @@ const { Option } = Select
 
 const TeamForm: React.FC<TeamFormProps> = ({
   onSubmit,
-  initialValues,
+  initialData,
   uploading,
 }) => {
-  const [name, setName] = useState(initialValues?.name || '')
-  const [role, setRole] = useState(initialValues?.role || '')
+  const [name, setName] = useState('')
+  const [role, setRole] = useState('')
   const [description, setDescription] = useState(
-    initialValues?.description || ''
+    initialData?.description || ''
   )
-  const [email, setEmail] = useState(initialValues?.email || '')
-  const [linkedin, setLinkedin] = useState(initialValues?.linkedin || '')
-  const [category, setCategory] = useState(initialValues?.category || '')
+  const [email, setEmail] = useState('')
+  const [linkedin, setLinkedin] = useState('')
+  const [category, setCategory] = useState('')
   const [file, setFile] = useState<File | null>(null)
+
+  useEffect(() => {
+    if (initialData) {
+      setName(initialData.name)
+      setRole(initialData.role)
+      setDescription(initialData.description)
+      setEmail(initialData.email)
+      setLinkedin(initialData.linkedin)
+      setCategory(initialData.category)
+    }
+  }, [initialData])
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files ? e.target.files[0] : null
@@ -32,16 +43,16 @@ const TeamForm: React.FC<TeamFormProps> = ({
     }
   }
 
-  const handleSubmit = async(e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     let uploadedImage = ''
-        if (file) {
-          const response = await cloudinaryService.upload(file)
-          if (response.success) {
-            uploadedImage = response.fileUrl
-          }
-        }
+    if (file) {
+      const response = await cloudinaryService.upload(file)
+      if (response.success) {
+        uploadedImage = response.fileUrl
+      }
+    }
     const formData = new FormData()
     formData.append('name', name)
     formData.append('role', role)
@@ -127,7 +138,7 @@ const TeamForm: React.FC<TeamFormProps> = ({
         loading={uploading}
         className="mt-4"
       >
-        {initialValues ? 'Update Team Member' : 'Add Team Member'}
+        {initialData ? 'Update Team Member' : 'Add Team Member'}
       </Button>
     </form>
   )
