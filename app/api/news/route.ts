@@ -24,9 +24,7 @@ export async function POST(request: Request) {
     const description = formData.get('description')
     const date = formData.get('date')
     const location = formData.get('location')
-    const file = formData.get('file') as Blob
-
-    const picture = file
+    const picture = formData.get('picture') as Blob
 
     const newBlog = new Blog({ title, picture, description, date, location })
     await newBlog.save()

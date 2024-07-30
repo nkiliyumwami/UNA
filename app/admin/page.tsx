@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { FaNewspaper, FaUsers, FaUserTie, FaUserFriends } from 'react-icons/fa'
+import axios from 'axios'
 
 export default function AdminPage() {
   const [greeting, setGreeting] = useState('')
@@ -20,38 +21,38 @@ export default function AdminPage() {
       setGreeting('Good Evening')
     }
 
-    // Mock data fetching
-    setNewsCount(10) // Replace with actual data fetching logic
-    setLeadershipCount(5) // Replace with actual data fetching logic
-    setBoardCount(3) // Replace with actual data fetching logic
+    const fetchCounts = async () => {
+      try {
+        const blogsResponse = await axios.get('/api/news')
+        setNewsCount(blogsResponse.data.blogs.length)
+
+        const teamRes = await axios.get('/api/team')
+        const leadershipCount = teamRes.data.teams.leadership.length
+        const boardCount = teamRes.data.teams.board.length
+        setLeadershipCount(leadershipCount)
+        setBoardCount(boardCount)
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+
+    fetchCounts()
   }, [])
 
   return (
-    <div className="p-8 ">
-      {/* <h1 className="text-4xl font-bold mb-6 text-gray-800 text-center">
-        Welcome to the Admin Dashboard
-      </h1> */}
+    <div className="p-8">
       <div className="p-6 mb-6 bg-white rounded-lg shadow-lg flex items-center justify-center">
-        {/* <div className="mr-4">
-          <img
-            src="/path-to-avatar.png"
-            alt="Admin Avatar"
-            className="w-16 h-16 rounded-full"
-          />
-        </div> */}
         <div>
           <h3 className="text-2xl font-semibold text-gray-700 text-center">
             {greeting}, Admin!
           </h3>
-          {/* <p className="text-gray-600">Welcome back to your dashboard.</p> */}
         </div>
       </div>
       <div className="flex flex-wrap -mx-3">
         <div
           className="p-6 bg-blue-500 rounded-lg shadow-lg flex flex-col items-center justify-center text-white mx-3 mb-6 relative overflow-hidden"
           style={{ flex: '1 1 45%' }}
-          onClick={() => router.push('/admin/blog')
-          }
+          onClick={() => router.push('/admin/blog')}
         >
           <div className="absolute inset-0">
             <div className="w-32 h-32 bg-blue-400 rounded-full absolute -top-10 -left-10 opacity-30"></div>
@@ -68,8 +69,7 @@ export default function AdminPage() {
         <div
           className="p-6 bg-purple-500 rounded-lg shadow-lg flex flex-col items-center justify-center text-white mx-3 mb-6 relative overflow-hidden"
           style={{ flex: '1 1 45%' }}
-          onClick={() => router.push('/admin/team')
-          }
+          onClick={() => router.push('/admin/team')}
         >
           <div className="absolute inset-0">
             <div className="w-32 h-32 bg-purple-400 rounded-full absolute -top-10 -left-10 opacity-30"></div>
@@ -78,16 +78,13 @@ export default function AdminPage() {
           <div className="relative z-10 text-center">
             <FaUserTie className="text-4xl mb-2 w-full" />
             <h3 className="text-xl font-semibold">Leadership</h3>
-            <p className="text-2xl font-bold mt-2">
-              {leadershipCount}
-            </p>
+            <p className="text-2xl font-bold mt-2">{leadershipCount}</p>
           </div>
         </div>
         <div
           className="p-6 hover:shadow-lg bg-red-500 rounded-lg shadow-lg flex flex-col items-center justify-center text-white mx-3 mb-6 relative overflow-hidden"
           style={{ flex: '1 1 45%' }}
-          onClick={() => router.push('/admin/team')
-          }
+          onClick={() => router.push('/admin/team')}
         >
           <div className="absolute inset-0">
             <div className="w-32 h-32 bg-red-400 rounded-full absolute -top-10 -left-10 opacity-30"></div>
