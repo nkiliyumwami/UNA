@@ -17,8 +17,8 @@ jobs:
 
       - name: Set up Git
         run: |
-          git config --global user.name 'nkiliyumwami'
-          git config --global user.email 'nkiliyumwami@gmail.com'
+          git config --global user.name nkiliyumwami
+          git config --global user.email nkiliyumwami@gmail.com
 
       - name: Add upstream repository
         run: git remote add upstream https://github.com/Aline-Uwera/UNARW.git
