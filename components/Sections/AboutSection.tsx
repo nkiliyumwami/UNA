@@ -1,7 +1,7 @@
-import Image from 'next/image'
-import React from 'react'
-import SDGs from '../../public/SDGs.png'
-import VisionMission from './VisionMission'
+import Image from "next/image";
+import React from "react";
+import SDGs from "../../public/SDGs.png";
+import VisionMission from "./VisionMission";
 
 export const AboutSection = () => {
   return (
@@ -26,26 +26,42 @@ export const AboutSection = () => {
 
               {/* <h4 className="text-[22px] mb-2 font-semibold">Our History</h4> */}
               <p className="leading-7 text-[15px] text-[#646464]">
-                The United Nations Association Rwanda (UNA-RWANDA) is dedicated to
-                transformative change, focusing on achieving the Sustainable
+                The United Nations Association Rwanda (UNA-RWANDA) is dedicated
+                to transformative change, focusing on achieving the Sustainable
                 Development Goals (SDGs), with an emphasis on eradicating
                 poverty, fostering peace, addressing climate change, and
                 protecting the environment. We promote diversity, equity, and
                 inclusion, striving for a world where everyone thrives and
                 contributes to a brighter future. <br />
                 <br />
-                UNA-RWANDA offers programs in knowledge dissemination, human rights
-                promotion, peace and conflict resolution. We are part of a
-                global network of UNAs, coordinated by the World Federation of
-                United Nations Associations (WFUNA), active in over 100
-                countries. Join us in building a more inclusive and prosperous
-                world for current and future generations.
+                UNA-RWANDA offers programs in knowledge dissemination, human
+                rights promotion, peace and conflict resolution. We are part of
+                a global network of UNAs, coordinated by the World Federation of
+                United Nations Associations{" "}
+                <a
+                  href="https://www.wfuna.org/"
+                  target="_blank"
+                  className="text-blue-400 underline"
+                >
+                  WFUNA
+                </a>{" "}
+                active in over 100 countries. Join us in building a more
+                inclusive and prosperous world for current and future
+                generations.{" "}
               </p>
+              <div className="mt-4">
+                <a
+                  href="/about-us"
+                  className="bg-blue-500 px-4 py-3 text-white rounded-sm hover:bg-blue-600 transition"
+                >
+                  read more About Us
+                </a>
+              </div>
             </div>
           </div>
         </div>
         <VisionMission />
       </div>
     </div>
-  )
-}
+  );
+};

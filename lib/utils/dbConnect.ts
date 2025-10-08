@@ -29,7 +29,7 @@
 
 import mongoose from 'mongoose'
 
-const MONGODB_URI = process.env.MONGODB_URI || ''
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://una-dev-admin:DB%40una2025@unacluster.wuglfik.mongodb.net/una_db?retryWrites=true&w=majority'
 
 if (!MONGODB_URI) {
   throw new Error(

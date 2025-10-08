@@ -47,10 +47,13 @@ export async function GET() {
     const leadershipTeam = await TeamMember.find({ category: 'leadership' })
     const boardMembers = await TeamMember.find({ category: 'board' })
 
+     console.log(leadershipTeam, boardMembers);
+
     return NextResponse.json(
       { teams: { leadership: leadershipTeam, board: boardMembers } },
       { status: 200 }
     )
+   
   } catch (error: any) {
     return NextResponse.json(
       { message: 'Error fetching team members', error: error.message },

@@ -1,6 +1,6 @@
-import React from 'react'
-import bgImage from '../../public/contact-us.webp'
-import GetInTouch from '@/components/ui/GetinTouch'
+import React from "react";
+import bgImage from "../../public/contact-us.webp";
+import GetInTouch from "@/components/ui/GetinTouch";
 
 const Contact = () => {
   return (
@@ -11,9 +11,9 @@ const Contact = () => {
       >
         <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-0"></div>
       </div>
-      <GetInTouch/>
+      <GetInTouch />
     </div>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;

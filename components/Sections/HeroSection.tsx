@@ -1,7 +1,6 @@
-import bgImage from '../../public/unHome.png'
-import rwun from '../../public/unrw.jpg'
-import Image from 'next/image'
-
+import bgImage from "../../public/unHome.png";
+import rwun from "../../public/unrw.jpg";
+import Image from "next/image";
 
 const HeroSection = () => {
   return (
@@ -28,7 +27,7 @@ const HeroSection = () => {
           <div className="gap-5 flex">
             <a href="/get-involved">
               <button className="hover:bg-[#4894DF] hover:text-white px-6 py-3 my-[15px] rounded-md capitalize border border-[#4894DF]">
-                Get Involved
+                Membership
               </button>
             </a>
             {/* <a href="/get-involved">
@@ -53,11 +52,12 @@ const HeroSection = () => {
         style={{ backgroundImage: `url(${bgImage.src})` }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-        <p className='z-20 text-center'>Promoting the Aims and Ideals of the United Nations.</p>
+        <p className="z-20 text-center">
+          Promoting the Aims and Ideals of the United Nations.
+        </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HeroSection
-
+export default HeroSection;

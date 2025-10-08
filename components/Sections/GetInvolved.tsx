@@ -1,35 +1,35 @@
-import { HeartIcon, UserIcon } from "@heroicons/react/16/solid"
-import { RiMailLine } from "react-icons/ri"
-import EmailSubscriptionPopup from "../ui/EmailSubscriptionPopup"
+import { HeartIcon, UserIcon } from "@heroicons/react/16/solid";
+import { RiMailLine } from "react-icons/ri";
+import EmailSubscriptionPopup from "../ui/EmailSubscriptionPopup";
 
 const involvementOptions = [
   {
-    title: 'Volunteer',
+    title: "Volunteer",
     description:
-      'Join our team of volunteers and make a difference in your community.',
+      "Join our team of volunteers and make a difference in your community.",
     icon: UserIcon,
-    link: '#',
+    link: "#",
   },
   {
-    title: 'Donate',
-    description: 'Support our mission by making a donation.',
+    title: "Donate",
+    description: "Support our mission by making a donation.",
     icon: HeartIcon,
-    link: '#',
+    link: "#",
   },
   {
-    title: 'Subscribe',
-    description: 'Stay updated by subscribing to our newsletter.',
+    title: "Subscribe",
+    description: "Stay updated by subscribing to our newsletter.",
     icon: RiMailLine,
-    link: '#',
+    link: "#",
   },
-]
+];
 
 const GetInvolvedSection = () => {
   return (
     <section className="py-12 bg-gradient-to-r from-purple-400 to-[#4894DF]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-8">
-          Get Involved
+          Membership & Involvement
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {involvementOptions.map((option, index) => (
@@ -44,7 +44,7 @@ const GetInvolvedSection = () => {
               <p className="text-gray-600 text-center mb-4">
                 {option.description}
               </p>
-              {option.title === 'Donate' || option.title === 'Volunteer' ? (
+              {option.title === "Donate" || option.title === "Volunteer" ? (
                 <a
                   href={option.link}
                   className="text-indigo-600 hover:text-indigo-500 font-medium"
@@ -59,7 +59,7 @@ const GetInvolvedSection = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default GetInvolvedSection
+export default GetInvolvedSection;
