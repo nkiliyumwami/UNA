@@ -1,21 +1,19 @@
-'use client'
+"use client";
 
-import { HeartIcon, UserIcon } from "@heroicons/react/16/solid"
-import { RiMailLine } from "react-icons/ri"
-import React, { useState } from 'react'
-import bgImage from '../../public/getinvolved.jpeg'
-import EmailSubscriptionPopup from "@/components/ui/EmailSubscriptionPopup"
-import GetInvolvedForm from "@/components/forms/GetInvolvedForm"
+import { HeartIcon, UserIcon } from "@heroicons/react/16/solid";
+import { RiMailLine } from "react-icons/ri";
+import React, { useState } from "react";
+import EmailSubscriptionPopup from "@/components/ui/EmailSubscriptionPopup";
+import GetInvolvedForm from "@/components/forms/GetInvolvedForm";
 
 const GetInvolved = () => {
-  const [isOpen, setIsOpen] = useState(false)
-      const [type, setType] = useState<'membership' | 'volunteering'>('membership');
+  const [isOpen, setIsOpen] = useState(false);
+  const [type, setType] = useState<"membership" | "volunteering">("membership");
 
-
-  const handleOpenPopup = (title:any) => {
-    setType(title)
-    setIsOpen(true)
-  }
+  const handleOpenPopup = (title: any) => {
+    setType(title);
+    setIsOpen(true);
+  };
   const involvementOptions = [
     // {
     //   title: 'Volunteer',
@@ -25,24 +23,24 @@ const GetInvolved = () => {
     //   link: '#',
     // },
     {
-      title: 'Become one of us',
-      description: 'Support our mission by becoming one of us.',
+      title: "Become one of us",
+      description: "Support our mission by becoming one of us.",
       icon: UserIcon,
-      link: '#',
+      link: "#",
     },
     {
-      title: 'Subscribe',
-      description: 'Stay updated by subscribing to our newsletter.',
+      title: "Subscribe",
+      description: "Stay updated by subscribing to our newsletter.",
       icon: RiMailLine,
-      link: '#',
+      link: "#",
     },
-  ]
+  ];
   return (
     <div>
       <main className=" bg-white">
         <div
           className="pt-36 h-[256px] bg-center bg-cover bg-no-repeat relative"
-          style={{ backgroundImage: `url(${bgImage.src})` }}
+          style={{ backgroundImage: `url(/getinvolved.jpeg)` }}
         >
           <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
         </div>
@@ -51,7 +49,7 @@ const GetInvolved = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center w-full h-full relative z-10 ">
               <h1 className="pt-3 text-center mb-4 font-bold tracking-wide  text-3xl">
-                Get Involved
+                Membership & Involvement
               </h1>
               <p className="text-center mb-12 ">
                 Explore different ways to get involved and support our mission.
@@ -70,11 +68,11 @@ const GetInvolved = () => {
                   <p className="text-gray-600 text-center mb-4">
                     {option.description}
                   </p>
-                  {option.title === 'Become one of us' ||
-                  option.title === 'Volunteer' ? (
+                  {option.title === "Become one of us" ||
+                  option.title === "Volunteer" ? (
                     <button
                       onClick={() => {
-                        handleOpenPopup(option.title)
+                        handleOpenPopup(option.title);
                       }}
                       className="text-indigo-600 hover:text-indigo-500 font-medium"
                     >
@@ -91,9 +89,7 @@ const GetInvolved = () => {
         <GetInvolvedForm type={type} isOpen={isOpen} setIsOpen={setIsOpen} />
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default GetInvolved
-
-
+export default GetInvolved;

@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Blog } from '../page'
-import bgImage from '../../../public/news.jpeg'
 
 import {
   FacebookShareButton,
@@ -80,7 +79,7 @@ const Page = ({ params }: { params: { id: string } }) => {
     <div>
       <div
         className="py-32 h-[256px] bg-center bg-cover bg-no-repeat relative"
-        style={{ backgroundImage: `url(${bgImage.src})` }}
+        style={{ backgroundImage: `url(/news.jpeg)` }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
       </div>

@@ -1,24 +1,41 @@
-import Image from 'next/image'
-import React from 'react'
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 export const ServiceCard = ({ service }: any) => {
   return (
-    <div className="relative group rounded-lg shadow-lg bg-white text-center overflow-hidden h-64">
-      {/* Background Icon */}
-      <div
-        className={`absolute inset-0 flex items-center justify-center transition-transform duration-500 ease-in-out ${service.bgColor}`}
-        style={{ zIndex: 1 }}
-      >
-        <service.icon className="w-20 h-20 text-white group-hover:scale-125 transition-transform duration-500 ease-in-out opacity-30" />
+    <div className="relative group rounded-lg shadow-lg bg-white overflow-hidden h-72 cursor-pointer">
+      {/* Background Image */}
+      <div className="relative w-full h-full">
+        <Image
+          src={service.image}
+          alt={service.title}
+          fill
+          className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+        />
       </div>
 
-      {/* Overlay content */}
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-60 transition-all duration-500 ease-in-out p-4 text-white">
-        <h3 className="text-xl font-semibold">{service.title}</h3>
-        <p className="mt-2 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
-          {service.description}
-        </p>
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black bg-opacity-30 flex items-end transition-all duration-500 group-hover:bg-opacity-70">
+        <div className="p-4 w-full text-center text-white">
+          {/* Title always visible */}
+          <h3 className="text-lg font-semibold">{service.title}</h3>
+
+          {/* Hidden until hover */}
+          <p className="mt-2 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
+            {service.description}
+          </p>
+
+          <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <Link
+              href={`/programs/${service.slug}`}
+              className="text-blue-300 hover:underline font-medium"
+            >
+              Read More →
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};

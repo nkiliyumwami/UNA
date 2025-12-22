@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Blog, { IBlog } from '../../lib/models/Blog'
 import { truncateText } from '@/lib/utils/truncateText'
-import bgImage from '../../public/latestnews.png'
 
 export interface Blog {
   _id: string
@@ -67,7 +66,7 @@ const News = () => {
     <div className="">
       <div
         className="py-32 h-[256px] bg-center bg-cover bg-no-repeat relative"
-        style={{ backgroundImage: `url(${bgImage.src})` }}
+        style={{ backgroundImage: `url(/latestnews.png)` }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
       </div>

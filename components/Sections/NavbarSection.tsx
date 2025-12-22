@@ -1,46 +1,44 @@
-'use client'
-import { useEffect, useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import logo from '../../public/unarwanda16X16.png'
-import unLogo from '../../public/un-logo.png'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/16/solid'
-import { usePathname } from 'next/navigation'
-import { DownOutlined } from '@ant-design/icons'
-import type { MenuProps } from 'antd'
-import { Dropdown, Space } from 'antd'
-
-
+"use client";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import logo from "../../public/unarwanda16X16.png";
+import unLogo from "../../public/un-logo.png";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/16/solid";
+import { usePathname } from "next/navigation";
+import { DownOutlined } from "@ant-design/icons";
+import type { MenuProps } from "antd";
+import { Dropdown, Space } from "antd";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const pathname = usePathname()
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
   const isActive = (href: string) => {
-    return pathname === href
-  }
-  
-  const items: MenuProps['items'] = [
+    return pathname === href;
+  };
+
+  const items: MenuProps["items"] = [
     {
-      key: '1',
+      key: "1",
       label: (
-          <a
-            href="/media"
-            className={`block px-4 py-2 hover:text-[#4894DF] font-semibold ${
-              isActive('/media') ? 'text-[#4894DF]' : ''
-            }`}
-          >
-            Media
-          </a>
+        <a
+          href="/media"
+          className={`block px-4 py-2 hover:text-[#4894DF] font-semibold ${
+            isActive("/media") ? "text-[#4894DF]" : ""
+          }`}
+        >
+          Media
+        </a>
       ),
     },
     {
-      key: '2',
+      key: "2",
       label: (
         <a
           href="/get-involved"
           className={`block px-4 py-2 hover:text-[#4894DF] font-semibold ${
-            isActive('/get-involved') ? 'text-[#4894DF]' : ''
+            isActive("/get-involved") ? "text-[#4894DF]" : ""
           }`}
         >
           Get Involved
@@ -48,12 +46,12 @@ const Navbar = () => {
       ),
     },
     {
-      key: '3',
+      key: "3",
       label: (
         <a
           href="/contact-us"
           className={`block px-4 py-2 hover:text-[#4894DF] font-semibold ${
-            isActive('/contact-us') ? 'text-[#4894DF]' : ''
+            isActive("/contact-us") ? "text-[#4894DF]" : ""
           }`}
         >
           Contact Us
@@ -61,59 +59,59 @@ const Navbar = () => {
       ),
     },
     {
-      key: '4',
+      key: "4",
       label: (
         <a
           href="/donate"
           className={`block px-4 py-2 hover:text-[#4894DF] font-semibold ${
-            isActive('/donate') ? 'text-[#4894DF]' : ''
+            isActive("/donate") ? "text-[#4894DF]" : ""
           }`}
         >
           Donate
         </a>
       ),
     },
-  ]
-    const toggleMenu = () => {      
-    setIsOpen(!isOpen)
-  }
+  ];
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
-        setIsScrolled(true)
+        setIsScrolled(true);
       } else {
-        setIsScrolled(false)
+        setIsScrolled(false);
       }
-    }
+    };
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
-      {isActive('/signin') ||
-      isActive('/admin') ||
-      isActive('/admin/team') ||
-      isActive('/admin/contact') ||
-      isActive('/admin/blog') ? (
-        ''
+      {isActive("/signin") ||
+      isActive("/admin") ||
+      isActive("/admin/team") ||
+      isActive("/admin/contact") ||
+      isActive("/admin/blog") ? (
+        ""
       ) : (
         <nav
           className={`fixed w-full z-20 transition-colors duration-300 pt-[15px] ${
             isScrolled
-              ? 'bg-white shadow-md text-black'
-              : 'bg-transparent text-white'
+              ? "bg-white shadow-md text-black"
+              : "bg-transparent text-white"
           }`}
         >
-          <div className=" mx-auto md:py-2 py-6 px-8 md:px-24 flex items-center justify-between">
+          <div className=" mx-auto md:py-2 py-6 px-8 flex items-center justify-between">
             <div className="flex items-center">
               <Link className="flex-shrink-0" href="/">
                 <Image
-                  width={130}
-                  height={50}
-                  className={`md:w-[160px] w-[80px]`}
+                  width={80}
+                  height={80}
+                  className={`md:w-[120px] w-[80px]`}
                   src={logo}
                   alt="UNA Rwanda"
                 />
@@ -123,7 +121,7 @@ const Navbar = () => {
               <a
                 href="/"
                 className={`hover:text-[#4894DF] px-2 font-semibold ${
-                  isActive('/') ? 'text-[#4894DF]' : ''
+                  isActive("/") ? "text-[#4894DF]" : ""
                 }`}
               >
                 Home
@@ -131,12 +129,13 @@ const Navbar = () => {
               <a
                 href="/about-us"
                 className={`hover:text-[#4894DF] px-2 font-semibold ${
-                  isActive('/about-us') ? 'text-[#4894DF]' : ''
+                  isActive("/about-us") ? "text-[#4894DF]" : ""
                 }`}
               >
                 About Us
               </a>
-              <a
+              {/*
+            <a
                 href="/our-programs"
                 className={`hover:text-[#4894DF] px-2 font-semibold ${
                   isActive('/our-programs') ? 'text-[#4894DF]' : ''
@@ -144,10 +143,11 @@ const Navbar = () => {
               >
                 Our Programs
               </a>
+           */}
               <a
                 href="/our-team"
                 className={`hover:text-[#4894DF] px-2 font-semibold ${
-                  isActive('/our-team') ? 'text-[#4894DF]' : ''
+                  isActive("/our-team") ? "text-[#4894DF]" : ""
                 }`}
               >
                 Our Team
@@ -155,7 +155,7 @@ const Navbar = () => {
               <a
                 href="/news"
                 className={`hover:text-[#4894DF] px-2 font-semibold ${
-                  isActive('/news') ? 'text-[#4894DF]' : ''
+                  isActive("/news") ? "text-[#4894DF]" : ""
                 }`}
               >
                 News & Events
@@ -163,19 +163,21 @@ const Navbar = () => {
               <a
                 href="/media"
                 className={`hover:text-[#4894DF] px-2 font-semibold md:hidden m:block ${
-                  isActive('/media') ? 'text-[#4894DF]' : ''
+                  isActive("/media") ? "text-[#4894DF]" : ""
                 }`}
               >
                 Media
               </a>
-              <a
+
+              {/* <a
                 href="get-involved"
                 className={`hover:text-[#4894DF] px-2 font-semibold md:hidden m:block ${
-                  isActive('/get-involved') ? 'text-[#4894DF]' : ''
+                  isActive("/get-involved") ? "text-[#4894DF]" : ""
                 }`}
               >
                 Get Involved
-              </a>
+              </a> */}
+
               <Dropdown menu={{ items }} className="hidden md:flex m:hidden">
                 <a onClick={(e) => e.preventDefault()}>
                   <Space>
@@ -187,7 +189,7 @@ const Navbar = () => {
               <a
                 href="/contact-us"
                 className={`hover:text-[#4894DF] px-2 font-semibold md:hidden m:block ${
-                  isActive('/contact-us') ? 'text-[#4894DF]' : ''
+                  isActive("/contact-us") ? "text-[#4894DF]" : ""
                 }`}
               >
                 Contact us
@@ -195,7 +197,7 @@ const Navbar = () => {
               <a
                 href="/donate"
                 className={`hover:text-[#4894DF] px-2 font-semibold md:hidden m:block ${
-                  isActive('') ? 'text-[#4894DF]' : ''
+                  isActive("") ? "text-[#4894DF]" : ""
                 }`}
               >
                 Donate
@@ -206,13 +208,13 @@ const Navbar = () => {
                 {isOpen ? (
                   <XMarkIcon
                     className={`h-10 ${
-                      isScrolled ? 'text-black' : 'text-white'
+                      isScrolled ? "text-black" : "text-white"
                     }`}
                   />
                 ) : (
                   <Bars3Icon
                     className={`h-10 ${
-                      isScrolled ? 'text-black' : 'text-white'
+                      isScrolled ? "text-black" : "text-white"
                     }`}
                   />
                 )}
@@ -221,9 +223,9 @@ const Navbar = () => {
             <div className="hidden md:flex items-center">
               <Link className="flex-shrink-0" href="/">
                 <Image
-                  width={130}
-                  height={50}
-                  className={`md:w-[160px] w-[80px] p-3`}
+                  width={80}
+                  height={80}
+                  className={`md:w-[120px] w-[80px] p-3`}
                   src={unLogo}
                   alt="UNA Rwanda"
                 />
@@ -235,7 +237,7 @@ const Navbar = () => {
               <a
                 href="/"
                 className={`block px-4 py-2 hover:text-[#4894DF] font-semibold ${
-                  isActive('/') ? 'text-[#4894DF]' : ''
+                  isActive("/") ? "text-[#4894DF]" : ""
                 }`}
               >
                 Home
@@ -243,23 +245,23 @@ const Navbar = () => {
               <a
                 href="/about-us"
                 className={`block px-4 py-2 hover:text-[#4894DF] font-semibold ${
-                  isActive('/about-us') ? 'text-[#4894DF]' : ''
+                  isActive("/about-us") ? "text-[#4894DF]" : ""
                 }`}
               >
                 About Us
               </a>
-              <a
+              {/* <a
                 href="/our-programs"
                 className={`block px-4 py-2 hover:text-[#4894DF] font-semibold ${
-                  isActive('/our-programs') ? 'text-[#4894DF]' : ''
+                  isActive("/our-programs") ? "text-[#4894DF]" : ""
                 }`}
               >
                 Our Programs
-              </a>
+              </a> */}
               <a
                 href="/our-team"
                 className={`block px-4 py-2 hover:text-[#4894DF] font-semibold ${
-                  isActive('/our-team') ? 'text-[#4894DF]' : ''
+                  isActive("/our-team") ? "text-[#4894DF]" : ""
                 }`}
               >
                 Our Team
@@ -267,7 +269,7 @@ const Navbar = () => {
               <a
                 href="/news"
                 className={`block px-4 py-2 hover:text-[#4894DF] font-semibold ${
-                  isActive('/news') ? 'text-[#4894DF]' : ''
+                  isActive("/news") ? "text-[#4894DF]" : ""
                 }`}
               >
                 News & Events
@@ -275,23 +277,23 @@ const Navbar = () => {
               <a
                 href="/media"
                 className={`block px-4 py-2 hover:text-[#4894DF] font-semibold ${
-                  isActive('/media') ? 'text-[#4894DF]' : ''
+                  isActive("/media") ? "text-[#4894DF]" : ""
                 }`}
               >
                 Media
               </a>
-              <a
+              {/* <a
                 href="/get-involved"
                 className={`block px-4 py-2 hover:text-[#4894DF] font-semibold ${
-                  isActive('/get-involved') ? 'text-[#4894DF]' : ''
+                  isActive("/get-involved") ? "text-[#4894DF]" : ""
                 }`}
               >
                 Get Involved
-              </a>
+              </a> */}
               <a
                 href="/contact-us"
                 className={`block px-4 py-2 hover:text-[#4894DF] font-semibold ${
-                  isActive('/contact-us') ? 'text-[#4894DF]' : ''
+                  isActive("/contact-us") ? "text-[#4894DF]" : ""
                 }`}
               >
                 Contact Us
@@ -299,7 +301,7 @@ const Navbar = () => {
               <a
                 href="/donate"
                 className={`block px-4 py-2 hover:text-[#4894DF] font-semibold ${
-                  isActive('/donate') ? 'text-[#4894DF]' : ''
+                  isActive("/donate") ? "text-[#4894DF]" : ""
                 }`}
               >
                 Donate
@@ -309,7 +311,7 @@ const Navbar = () => {
         </nav>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

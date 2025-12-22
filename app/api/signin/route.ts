@@ -2,22 +2,20 @@ import { NextResponse } from 'next/server'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
-const ADMIN_USERNAME = process.env.ADMIN_USERNAME
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD
-
-const ADMIN_PASSWORD_HASH = bcrypt.hashSync(ADMIN_PASSWORD as string, 10)
-
-const users = [{ username: ADMIN_USERNAME, passwordHash: ADMIN_PASSWORD_HASH }]
-
 export async function POST(req: Request) {
   try {
     const { username, password } = await req.json()
 
-    const user = users.find((user) => user.username === username)
+    const ADMIN_USERNAME = process.env.ADMIN_USERNAME
+    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD
 
-    if (user && bcrypt.compareSync(password, user.passwordHash)) {
+    if (!ADMIN_USERNAME || !ADMIN_PASSWORD) {
+      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
+    }
+
+    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
       const token = jwt.sign(
-        { username: user.username },
+        { username },
         process.env.JWT_SECRET as string,
         { expiresIn: '1h' }
       )
@@ -32,10 +30,6 @@ export async function POST(req: Request) {
         maxAge: 3600,
         path: '/',
       })
-      
-      console.log('====================================');
-      console.log(response);
-      console.log('====================================');
 
       return response
     }

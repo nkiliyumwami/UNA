@@ -1,3 +1,48 @@
+# UNA Rwanda – Documentation
+
+## UNA Rwanda Website
+
+### 1. Introduction
+
+The **UNA Rwanda Website** serves as the official digital presence of UNA Rwanda. It provides information about the organization, its mission, activities, programs, and news updates. The site is built to be **accessible, responsive, and informative**, targeting both local and international audiences.
+
+### 2. System Overview
+
+The website is designed as a **public platform** to;
+
+- Share organizational news, events, and updates.
+- Provide details about ongoing projects and programs.
+- Promote UNA Rwanda’s mission, values, and Sustainable Development Goals (SDGs).
+- Connect with members, partners, and the global community.
+
+### 3. User Guide
+
+- **Home**: Overview of UNA Rwanda and highlights.
+- **About Us**: Mission, vision, values, leadership.
+- **Programs/Projects**: Details of initiatives (SDGs, Women Empowerment, Peace & Conflict Resolution, etc.).
+- **News & Updates**: Blog-style posts about activities and campaigns.
+- **Contact**: Email, phone, address, and contact form.
+
+### 4. Developer Guide
+
+**Tech Stack**
+
+- Frontend: Next.js + Tailwind CSS
+- Backend: Next.js API routes (where needed)
+- Database (optional for dynamic content): MongoDB Atlas
+- Hosting: Vercel
+- Media Storage: Cloudinary
+
+**Setup**
+
+````bash
+git clone https://github.com/devunarwanda/UNARW.git
+cd UNARW
+npm install
+npm run dev
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -12,7 +57,7 @@ yarn dev
 pnpm dev
 # or
 bun dev
-```
+````
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
